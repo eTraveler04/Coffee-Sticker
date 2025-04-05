@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243270999363",
+    "project_id": "coffee-tracker-d9019",
+    "storage_bucket": "coffee-tracker-d9019.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243270999363:android:364fedf802909d184163f6",
+        "android_client_info": {
+          "package_name": "com.example.coffeecard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsA4MItSVlNNhuzLanzoraL-5q-PBrnTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
