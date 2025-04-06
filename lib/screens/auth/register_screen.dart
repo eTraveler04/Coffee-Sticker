@@ -55,7 +55,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           throw Exception('Nieprawidłowy kod zaproszenia');
         }
 
-        final managerId = query.docs.first.id;
+        final managerDoc = query.docs.first;
+        final managerId = managerDoc.id;
 
         // Tworzenie konta użytkownika
         await FirebaseFirestore.instance.collection('users').doc(uid).set({
@@ -67,17 +68,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       }
 
-      if (context.mounted) {
+      if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const LoginScreen()),
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Błąd: ${e.toString()}')));
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Błąd: ${e.toString()}')));
+      }
     } finally {
-      setState(() => _loading = false);
+      if (mounted) {
+        setState(() => _loading = false);
+      }
     }
   }
 

@@ -43,22 +43,41 @@ class _LoginScreenState extends State<LoginScreen> {
               .get();
 
       if (userDoc.exists) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const UserHomeScreen()),
-        );
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            // MaterialPageRoute(builder: (_) => const UserHomeScreen()),
+            MaterialPageRoute(
+              builder:
+                  (_) => Scaffold(
+                    body: Center(child: Text('Użytkownik zalogowany')),
+                  ),
+            ),
+          );
+        }
       } else if (managerDoc.exists) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const ManagerHomeScreen()),
-        );
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            // MaterialPageRoute(builder: (_) => const ManagerHomeScreen()),
+            MaterialPageRoute(
+              builder:
+                  (_) =>
+                      Scaffold(body: Center(child: Text('Manager zalogowany'))),
+            ),
+          );
+        }
       } else {
         throw Exception('Brak roli przypisanej do konta.');
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Błąd logowania: ${e.toString()}')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Błąd logowania: ${e.toString()}')),
+        );
+      }
     } finally {
-      setState(() => _loading = false);
+      if (mounted) {
+        setState(() => _loading = false);
+      }
     }
   }
 
